@@ -1,0 +1,172 @@
+<section>
+	<div class="container">
+		<div class="container-fluid">
+			<div>
+				<h1 style="text-align: center;"> Welcome <strong style="color: royalblue;">{{this.username}} </strong> to your Kamer Bet's account </h1>
+			</div>
+			
+			<div class="btn-group" style="width: 100%">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Deposit</button>
+
+					  <!-- The Modal -->
+					  <div class="modal fade" id="myModal">
+					    <div class="modal-dialog">
+					      <div class="modal-content">
+					      
+					        <!-- Modal Header -->
+					        <div class="modal-header">
+					          <h4 class="modal-title" style="text-align: center;font-weight:bold;">Do your Deposit </h4>
+					          <button type="button" class="close" data-dismiss="modal"> ×</button>
+					        </div>
+					        
+					        <!-- Modal body -->
+					        <div class="modal-body">
+					        	<div>
+						        		<form #f="ngForm">	
+
+										<p style="text-align: center;">Make Deposit</p>
+
+										<div class="form-group">
+											<label>Enter your amount: </label>
+											<input type="number" class="form-control" name="amount" placeholder="Enter the XAF amount (min 1000 - 1000000)" ngModel>
+											<br>
+										</div>
+
+										<div class="form-group">
+											<select class="custom-select" ngModel name="provider">
+												<option selected> With </option>
+												<option *ngFor="let topic of topics">{{ topic }}</option>
+											</select>
+										</div>
+										<br>
+										<button class="btn btn-primary btn-block" (click)="depositValidate(f.value['amount'] , f.value['provider'])">Validate</button>
+										</form>
+								</div>
+
+					        </div>
+					        
+					        <!-- Modal footer -->
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					        </div>
+					        
+					      </div>
+					    </div>
+					  </div>
+
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my_Modal">Withdrawal</button>
+										  <!-- The Modal -->
+					  <div class="modal fade" id="my_Modal">
+					    <div class="modal-dialog">
+					      <div class="modal-content">
+					      
+					        <!-- Modal Header -->
+					        <div class="modal-header">
+					          <h4 class="modal-title" style="text-align: center;font-weight:bold;">Do your Withdrawal </h4>
+					          <button type="button" class="close" data-dismiss="modal">×</button>
+					        </div>
+					        
+					        <!-- Modal body -->
+					        <div class="modal-body">
+					        	<div>
+						        	<form #g="ngForm">	
+
+										<p style="text-align: center;">Make Withdrawal</p>
+
+										<div class="form-group">
+											<label>Enter your amount: </label>
+											<input type="number" class="form-control" name="amount_" placeholder="Enter the XAF amount" ngModel>
+											<br>
+										</div>
+
+										<div class="form-group">
+											<select class="custom-select" ngModel name="provider_">
+												<option selected> With </option>
+												<option *ngFor="let topic of topics">{{ topic }}</option>
+											</select>
+										</div>
+										<br>
+										<button class="btn btn-primary btn-block" (click)="withdrawalValidate(g.value['amount_'] , g.value['provider_'])">Validate</button>
+									</form>
+								</div>
+
+					        </div>
+					        
+					        <!-- Modal footer -->
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					        </div>
+					        
+					      </div>
+					    </div>
+					  </div>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mYModal">Personal Info</button>
+				<div class="modal fade" id="mYModal">
+					<div class="modal-dialog ">
+					  <div class="modal-content">
+						<div class="modal-header" style="background-color: blue; color: white;">
+						  <h2 class="modal-title">Account Informations</h2>
+						  <button type="button" class="close" data-dismiss="modal">×</button>
+						</div>
+							<div class="container" >
+								<form #h="ngForm">
+									<br>
+									<div>
+										<label for="fullname"><h3><strong>Full Name:&nbsp;&nbsp; </strong></h3></label>
+										<input class="dis"  name="fullname" id="full" value="" disabled="disabled" [(ngModel)]="infos.fullname"> 
+									</div>
+			
+									<div>
+										<label for="username"><h3><strong>Username:&nbsp;&nbsp; </strong></h3></label>
+										<input class="dis" name="username" id="name" value="" disabled="disabled" [(ngModel)]="infos.username"> 
+									</div>
+			
+									<div>
+										<label for="email"><h3><strong>Email:&nbsp;&nbsp; </strong></h3></label>
+										<input class="dis" name="email" id="mail" value="" disabled="disabled" [(ngModel)]="infos.email">
+									</div>
+			
+									<div>
+										<label for="phone"><h3><strong>Phone Number:&nbsp;&nbsp; </strong></h3></label>
+										<input class="dis" name="phone" id="pho" value="" disabled="disabled" [(ngModel)]="infos.phone"> 
+									</div>
+									<br>
+							</form>
+						</div>
+						<div class="modal-footer">
+						  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						</div>
+					  </div>
+					</div>
+				  </div>
+			</div>
+		</div>
+		<br>
+		<button (click)="printToCart('printSectionId')" style="float: right; opacity: 0.6; transition: 0.3s;" class="btn btn-success">Print transaction</button>
+	<div class="container-fluid p-5" id="printSectionId">
+	
+		<div  style="text-align: center;">
+			<h1 style="font-size: xx-large;">Your balance is : <strong style="color: green; font-size: xx-large; ">{{accounts | number:'1.2-2'}} </strong> XAF</h1>			
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="border shadow " id="printSectionId">
+					<table class="table table-bordered">
+        
+						<tr>
+						  <th>Date/Time</th>
+						  <th>Description</th>
+						  <th>Debit</th>
+						  <th>Credit</th>
+						</tr>
+						<tr *ngFor="let transaction of transactions;let t=index">
+						  <td>{{transaction.datetime | date:'MM/dd HH:mm' }}</td>
+						  <td>{{transaction.desc}}</td>
+						  <td>{{debit[t]}}</td>
+						  <td>{{credit[t]}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
